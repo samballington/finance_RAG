@@ -9,3 +9,24 @@ services:
       - "org.springframework.boot.service-connection=postgres"
     ports:
       - '5432:5432'
+    networks:
+      - finance-rag-network
+
+  finance-rag-app:
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - pgvector
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://pgvector:5432/markets
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    networks:
+      - finance-rag-network
+
+networks:
+  finance-rag-network:
+    driver: bridge
