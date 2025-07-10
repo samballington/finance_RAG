@@ -124,35 +124,6 @@ src/
 - ✅ Environment variables used in Docker Compose
 - ✅ `.env` automatically ignored by git
 
-**⚠️ Never commit your `.env` file to version control!**
-
----
-
-## 🚨 Troubleshooting
-
-### Port 8080 already in use
-```bash
-docker compose down
-docker compose up --build
-```
-
-### Application won't start
-```bash
-# Check container logs
-docker compose logs finance-rag-app
-
-# Rebuild containers
-docker compose up --build --force-recreate
-```
-
-### Vector store issues
-```bash
-# Reset the database
-docker compose down -v
-docker compose up --build
-```
-
----
 
 ## 🔄 Development Workflow
 
@@ -185,16 +156,6 @@ SELECT id, metadata->>'slide_number', metadata->>'chunk_type' FROM vector_store 
 - **Smart Metadata**: Slide numbers, chunk types, hierarchy relationships
 - **Source Attribution**: Automatic [Source: Slide X] references in responses
 - **Optimized Retrieval**: Semantic similarity search with metadata filtering
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Make your changes (code will auto-rebuild in Docker)
-4. Test with `docker compose up --build`
-5. Submit a pull request
 
 ---
 
